@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HR Connect | Employee Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f6fc;
+            color: #20304b;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            background: #102f60;
+            color: white;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar h2 {
+            margin: 0;
+        }
+
+        .topbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border: 1px solid #ffffff80;
+            border-radius: 7px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .welcome-card {
+            padding: 28px;
+            border-radius: 14px;
+            color: white;
+            background: linear-gradient(120deg, #1769d2, #29a3d5);
+            margin-bottom: 28px;
+        }
+
+        .welcome-card h1 {
+            margin-top: 0;
+        }
+
+        .welcome-card p {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            margin: 30px 0 18px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 23px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #19375b0c;
+            border: 1px solid #e6ebf4;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .card-content {
+            min-width: 0;
+        }
+
+        .card p {
+            color: #758198;
+            margin: 8px 0;
+        }
+
+        .card h2 {
+            color: #1769d2;
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+            min-width: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 30px;
+        }
+
+        .blue {
+            background: #e0edff;
+        }
+
+        .green {
+            background: #dcf8e8;
+        }
+
+        .purple {
+            background: #eee2ff;
+        }
+
+        .cyan {
+            background: #d9f7f7;
+        }
+
+        .action-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .action {
+            background: white;
+            border: 1px solid #e3eaf5;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .action-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .action h3 {
+            margin-top: 0;
+        }
+
+        .action p {
+            color: #758198;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .status {
+            display: inline-block;
+            background: #fff0c7;
+            color: #8a6100;
+            padding: 7px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .action-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .topbar {
+                padding: 18px 5%;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .icon {
+                width: 52px;
+                height: 52px;
+                min-width: 52px;
+                font-size: 25px;
+            }
+
+            .action {
+                padding: 16px;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .status {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <h2>HR Connect</h2>
+        <a href="index.html">Logout</a>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome-card">
+            <h1>Welcome, Employee! 👋</h1>
+            <p>Your personal employee dashboard.</p>
+        </section>
+
+        <h2 class="section-title">My Overview</h2>
+
+        <section class="cards">
+
+            <article class="card">
+                <div class="icon blue">📅</div>
+                <div class="card-content">
+                    <p>Attendance</p>
+                    <h2>--</h2>
+                    <p>This month's attendance</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="icon green">🌴</div>
+                <div class="card-content">
+                    <p>Leave Balance</p>
+                    <h2>--</h2>
+                    <p>Available leave days</p>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="icon purple">⭐</div>
+                <div class="card-content">
+                    <p>Performance</p>
+                    <h2>--</h2>
+                    <p>Latest evaluation</p>
+                </div>
+            </article>
+
+        </section>
+
+        <h2 class="section-title">My Services</h2>
+
+        <section class="action-list">
+
+            <article class="action">
+                <div class="icon blue">💳</div>
+                <div class="action-content">
+                    <h3>Attendance & Payroll</h3>
+                    <p>View your attendance and salary information.</p>
+
+                </div>
+            </article>
+
+            <article class="action">
+                <div class="icon green">📝</div>
+                <div class="action-content">
+                    <h3>Leave Management</h3>
+                    <p>Apply for leave and track approval status.</p>
+                    
+                </div>
+            </article>
+
+            <article class="action">
+                <div class="icon purple">📊</div>
+                <div class="action-content">
+                    <h3>Performance Reports</h3>
+                    <p>View your performance evaluation.</p>
+                    
+                </div>
+            </article>
+
+            <article class="action">
+                <div class="icon cyan">📁</div>
+                <div class="action-content">
+                    <h3>My Documents</h3>
+                    <p>Access documents you're authorized to view.</p>
+                    
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

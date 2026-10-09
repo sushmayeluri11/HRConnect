@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Manage Documents</title><style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6fb;
+        color: #263248;
+    }
+
+    header {
+        background: #172554;
+        color: white;
+        padding: 22px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    header h2 {
+        font-size: 25px;
+    }
+
+    header a {
+        color: white;
+        text-decoration: none;
+        background: #334b83;
+        padding: 10px 16px;
+        border-radius: 7px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 35px auto;
+        padding: 0 20px;
+    }
+
+    .heading {
+        margin-bottom: 25px;
+    }
+
+    .heading h1 {
+        font-size: 29px;
+        margin-bottom: 8px;
+    }
+
+    .heading p {
+        color: #64748b;
+    }
+
+    .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .card, .panel {
+        background: white;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px #1725540d;
+        border: 1px solid #e5eaf3;
+    }
+
+    .card p {
+        color: #64748b;
+        margin-bottom: 12px;
+    }
+
+    .card h2 {
+        font-size: 27px;
+        color: #172554;
+    }
+
+    .panel h2 {
+        margin-bottom: 18px;
+        font-size: 21px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 22px;
+    }
+
+    input, select {
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        font-size: 14px;
+        background: white;
+    }
+
+    input {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .upload-label {
+        background: #2563eb;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+    }
+
+    th, td {
+        padding: 15px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e8edf5;
+    }
+
+    th {
+        background: #f1f5fb;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .tag {
+        background: #dbeafe;
+        color: #1d4ed8;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    .note {
+        margin-top: 20px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 20px;
+        }
+
+        .container {
+            margin-top: 25px;
+        }
+
+        .panel {
+            padding: 15px;
+        }
+    }
+</style>
+
+</head><body><header>
+    <h2>HR Connect</h2>
+    <a href="hr-dashboard.html">← Back to Dashboard</a>
+</header><main class="container"><section class="heading">
+    <h1>Manage Documents</h1>
+    <p>View and organize employee document records.</p>
+</section>
+
+<section class="summary">
+    <div class="card">
+        <p>Document Categories</p>
+        <h2>4</h2>
+    </div>
+
+    <div class="card">
+        <p>Registered Employees</p>
+        <h2>5</h2>
+    </div>
+
+    <div class="card">
+        <p>Storage Status</p>
+        <h2 style="font-size:21px;color:#15803d;">Demo Mode</h2>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Employee Document Records</h2>
+
+    <div class="actions">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search employee or document..."
+            oninput="filterDocuments()"
+        >
+
+        <select id="category" onchange="filterDocuments()">
+            <option value="">All Categories</option>
+            <option value="Identity">Identity Proof</option>
+            <option value="Education">Education</option>
+            <option value="Employment">Employment</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label class="upload-label" for="fileInput">
+            Choose File
+        </label>
+
+        <input
+            type="file"
+            id="fileInput"
+            hidden
+            onchange="showSelectedFile()"
+        >
+    </div>
+
+    <p id="fileMessage" class="note" style="margin:0 0 18px;"></p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Document Category</th>
+                    <th>Record Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="documentRows">
+                <tr>
+                    <td>EMP001</td>
+                    <td>Ravi Kumar</td>
+                    <td>Identity</td>
+                    <td><span class="tag">Sample Record</span></td>
+                </tr>
+                <tr>
+                    <td>EMP002</td>
+                    <td>Priya Sharma</td>
+                    <td>Education</td>
+                    <td><span class="tag">Sample Record</span></td>
+                </tr>
+                <tr>
+                    <td>EMP003</td>
+                    <td>Arjun Reddy</td>
+                    <td>Employment</td>
+                    <td><span class="tag">Sample Record</span></td>
+                </tr>
+                <tr>
+                    <td>EMP004</td>
+                    <td>Sneha Patel</td>
+                    <td>Other</td>
+                    <td><span class="tag">Sample Record</span></td>
+                </tr>
+                <tr>
+                    <td>EMP005</td>
+                    <td>Kiran Kumar</td>
+                    <td>Identity</td>
+                    <td><span class="tag">Sample Record</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="note">
+        Demo notice: These are sample document records. File selection
+        only displays the selected filename; files are not uploaded
+        or stored on the server. Secure storage requires backend
+        integration and access controls.
+    </p>
+</section>
+
+</main><footer>
+    © 2026 HR Connect | Human Resource Management System
+</footer><script>
+    function filterDocuments() {
+        const searchValue =
+            document.getElementById("search").value.toLowerCase();
+
+        const categoryValue =
+            document.getElementById("category").value.toLowerCase();
+
+        const rows =
+            document.querySelectorAll("#documentRows tr");
+
+        rows.forEach(function(row) {
+            const rowText = row.textContent.toLowerCase();
+            const category = row.cells[2].textContent.toLowerCase();
+
+            const matchesSearch = rowText.includes(searchValue);
+            const matchesCategory =
+                categoryValue === "" || category === categoryValue;
+
+            row.style.display =
+                matchesSearch && matchesCategory ? "" : "none";
+        });
+    }
+
+    function showSelectedFile() {
+        const fileInput = document.getElementById("fileInput");
+        const message = document.getElementById("fileMessage");
+
+        if (fileInput.files.length > 0) {
+            message.textContent =
+                "Selected file: " + fileInput.files[0].name +
+                " (Demo only — not uploaded.)";
+        }
+    }
+</script></body>
+</html>

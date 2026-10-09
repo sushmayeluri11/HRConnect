@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Choose Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-choice {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #082b59, #147fba);
+            color: white;
+            text-align: center;
+        }
+
+        .login-choice h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin: 20px 0 10px;
+        }
+
+        .login-choice > p {
+            margin-bottom: 35px;
+            color: #e0efff;
+        }
+
+        .choice-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .choice-card {
+            width: min(320px, 85vw);
+            padding: 35px 25px;
+            border-radius: 18px;
+            background: white;
+            color: #172b4d;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .choice-card .symbol {
+            font-size: 42px;
+        }
+
+        .choice-card h2 {
+            margin: 15px 0 10px;
+        }
+
+        .choice-card p {
+            color: #68758a;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .choice-card span {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            background: #1769d2;
+            color: white;
+            font-weight: bold;
+        }
+
+        .back-link {
+            margin-top: 30px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <main class="login-choice">
+        <p>HR CONNECT</p>
+        <h1>Choose Your Login</h1>
+        <p>Select your account type to continue.</p>
+
+        <div class="choice-cards">
+            <a href="employee-login.html" class="choice-card">
+                <div class="symbol">👤</div>
+                <h2>Employee Login</h2>
+                <p>Access your profile, attendance, payroll and leave requests.</p>
+                <span>Login as Employee →</span>
+            </a>
+
+            <a href="hr-login.html" class="choice-card">
+                <div class="symbol">🏢</div>
+                <h2>HR Login</h2>
+                <p>Manage employee records, payroll, leave approvals and reports.</p>
+                <span>Login as HR →</span>
+            </a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </main>
+</body>
+</html>

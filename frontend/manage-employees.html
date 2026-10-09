@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Manage Employees</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fc;
+            color: #20304b;
+        }
+
+        header {
+            background: #102f60;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            padding: 10px 15px;
+            border-radius: 7px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .welcome {
+            background: linear-gradient(120deg, #1769d2, #29a3d5);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin-top: 0;
+        }
+
+        .panel {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #e5eaf3;
+            overflow-x: auto;
+        }
+
+        .search {
+            width: 100%;
+            max-width: 350px;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccd5e3;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e5eaf3;
+        }
+
+        th {
+            background: #eaf2ff;
+            color: #102f60;
+        }
+
+        tr:hover {
+            background: #f7faff;
+        }
+
+        .message {
+            padding: 15px;
+            background: #eef5ff;
+            border-radius: 7px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 4%;
+            }
+
+            header h2 {
+                font-size: 18px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .panel {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>HR Connect | Admin</h2>
+    <a href="hr-dashboard.html">Back to Dashboard</a>
+</header>
+
+<main class="container">
+
+    <section class="welcome">
+        <h1>Manage Employees</h1>
+        <p>View and search registered employee details.</p>
+    </section>
+
+    <section class="panel">
+        <h2>Employee Directory</h2>
+
+        <input
+            type="text"
+            id="searchInput"
+            class="search"
+            placeholder="Search by ID, name or department..."
+        >
+
+        <div id="message" class="message">
+            Loading employee details...
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                </tr>
+            </thead>
+
+            <tbody id="employeeTable"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<script>
+    const table = document.getElementById("employeeTable");
+    const message = document.getElementById("message");
+    const searchInput = document.getElementById("searchInput");
+
+    let employees = [];
+
+    async function loadEmployees() {
+        try {
+            const response = await fetch(
+                "http://127.0.0.1:5000/api/employees"
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Unable to load employees");
+            }
+
+            employees = data.employees || [];
+            displayEmployees(employees);
+
+            message.textContent =
+                "Total registered employees: " + employees.length;
+
+        } catch (error) {
+            message.textContent =
+                "Unable to load employee details. Please check the backend.";
+        }
+    }
+
+    function displayEmployees(list) {
+        table.innerHTML = "";
+
+        if (list.length === 0) {
+            table.innerHTML =
+                '<tr><td colspan="5">No employees found.</td></tr>';
+            return;
+        }
+
+        list.forEach(function(employee) {
+            const row = document.createElement("tr");
+
+            [
+                employee.employee_id,
+                employee.full_name,
+                employee.email,
+                employee.department,
+                employee.designation
+            ].forEach(function(value) {
+                const cell = document.createElement("td");
+                cell.textContent = value || "-";
+                row.appendChild(cell);
+            });
+
+            table.appendChild(row);
+        });
+    }
+
+    searchInput.addEventListener("input", function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        const filtered = employees.filter(function(employee) {
+            return [
+                employee.employee_id,
+                employee.full_name,
+                employee.department
+            ].some(function(value) {
+                return String(value || "")
+                    .toLowerCase()
+                    .includes(searchText);
+            });
+        });
+
+        displayEmployees(filtered);
+    });
+
+    loadEmployees();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HR Connect | HR Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #092c4c, #1769aa);
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            padding: 38px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand {
+            text-align: center;
+            color: #1769d2;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .login-card h1 {
+            margin: 18px 0 8px;
+            font-size: 29px;
+            text-align: center;
+            color: #172b4d;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #263858;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d5deeb;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #1769d2;
+        }
+
+        .login-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #1769d2;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-submit:hover {
+            background: #1054ac;
+        }
+
+        .message {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 14px;
+            color: #b42318;
+        }
+
+        .back-links {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-links a {
+            color: #1769d2;
+            text-decoration: none;
+        }
+
+        .back-links p {
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="brand">
+                HR Connect
+            </div>
+
+            <h1>
+                HR Administrator Login
+            </h1>
+
+            <p class="subtitle">
+                Sign in to manage employee operations.
+            </p>
+
+            <form id="hrLoginForm">
+
+                <div class="form-group">
+
+                    <label for="hrId">
+                        HR ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="hrId"
+                        name="hrId"
+                        placeholder="Enter your HR ID"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-submit"
+                >
+                    Login as HR
+                </button>
+
+                <p
+                    id="loginMessage"
+                    class="message"
+                    role="status"
+                ></p>
+
+            </form>
+
+            <div class="back-links">
+
+                <a href="login-choice.html">
+                    ← Back to Login Selection
+                </a>
+
+                <p>
+                    <a href="index.html">
+                        Back to Home
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+    document
+        .getElementById("hrLoginForm")
+        .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const hrId =
+                document.getElementById("hrId").value.trim();
+
+            const password =
+                document.getElementById("password").value.trim();
+
+            const loginMessage =
+                document.getElementById("loginMessage");
+
+            loginMessage.textContent = "Logging in...";
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            role: "hr",
+                            employee_id: hrId,
+                            password: password
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (data.success) {
+
+                    loginMessage.textContent =
+                        "Login successful!";
+
+                    localStorage.setItem(
+                        "hrUser",
+                        JSON.stringify(data.user)
+                    );
+
+                    window.location.href =
+                        "hr-dashboard.html";
+
+                } else {
+
+                    loginMessage.textContent =
+                        data.message ||
+                        "Invalid HR ID or password.";
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                loginMessage.textContent =
+                    "Python backend is not connected.";
+
+            }
+
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Manage Payroll</title><style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6fb;
+        color: #263248;
+    }
+
+    header {
+        background: #172554;
+        color: white;
+        padding: 22px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    header h2 {
+        font-size: 25px;
+    }
+
+    header a {
+        color: white;
+        text-decoration: none;
+        background: #334b83;
+        padding: 10px 16px;
+        border-radius: 7px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 35px auto;
+        padding: 0 20px;
+    }
+
+    .heading {
+        margin-bottom: 25px;
+    }
+
+    .heading h1 {
+        font-size: 29px;
+        margin-bottom: 8px;
+    }
+
+    .heading p {
+        color: #64748b;
+    }
+
+    .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .card {
+        background: white;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px #1725540d;
+        border: 1px solid #e5eaf3;
+    }
+
+    .card p {
+        color: #64748b;
+        margin-bottom: 12px;
+    }
+
+    .card h2 {
+        font-size: 27px;
+        color: #172554;
+    }
+
+    .panel {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px #1725540d;
+        border: 1px solid #e5eaf3;
+    }
+
+    .panel h2 {
+        margin-bottom: 18px;
+        font-size: 21px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+    }
+
+    th, td {
+        padding: 15px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e8edf5;
+    }
+
+    th {
+        background: #f1f5fb;
+        color: #334155;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .status {
+        background: #dcfce7;
+        color: #166534;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .note {
+        margin-top: 20px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 20px;
+        }
+
+        .container {
+            margin-top: 25px;
+        }
+
+        .heading h1 {
+            font-size: 25px;
+        }
+
+        .panel {
+            padding: 15px;
+        }
+    }
+</style>
+
+</head><body><header>
+    <h2>HR Connect</h2>
+    <a href="hr-dashboard.html">← Back to Dashboard</a>
+</header><main class="container"><section class="heading">
+    <h1>Manage Payroll</h1>
+    <p>Employee salary details and payroll overview.</p>
+</section>
+
+<section class="summary">
+    <div class="card">
+        <p>Total Employees</p>
+        <h2>5</h2>
+    </div>
+
+    <div class="card">
+        <p>Payroll Month</p>
+        <h2 id="month"></h2>
+    </div>
+
+    <div class="card">
+        <p>Payroll Status</p>
+        <h2 style="color:#15803d;">Prepared</h2>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Employee Salary Details</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Department</th>
+                    <th>Monthly Salary</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>EMP001</td>
+                    <td>Ravi Kumar</td>
+                    <td>IT</td>
+                    <td>₹35,000</td>
+                    <td><span class="status">Prepared</span></td>
+                </tr>
+
+                <tr>
+                    <td>EMP002</td>
+                    <td>Priya Sharma</td>
+                    <td>HR</td>
+                    <td>₹30,000</td>
+                    <td><span class="status">Prepared</span></td>
+                </tr>
+
+                <tr>
+                    <td>EMP003</td>
+                    <td>Arjun Reddy</td>
+                    <td>Finance</td>
+                    <td>₹32,000</td>
+                    <td><span class="status">Prepared</span></td>
+                </tr>
+
+                <tr>
+                    <td>EMP004</td>
+                    <td>Sneha Patel</td>
+                    <td>Marketing</td>
+                    <td>₹28,000</td>
+                    <td><span class="status">Prepared</span></td>
+                </tr>
+
+                <tr>
+                    <td>EMP005</td>
+                    <td>Kiran Kumar</td>
+                    <td>IT</td>
+                    <td>₹38,000</td>
+                    <td><span class="status">Prepared</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="note">
+        Note: The salary figures shown are sample project data.
+        Payroll processing and salary disbursement are not connected
+        to a live payment system.
+    </p>
+</section>
+
+</main><footer>
+    © 2026 HR Connect | Human Resource Management System
+</footer><script>
+    const currentDate = new Date();
+
+    document.getElementById("month").textContent =
+        currentDate.toLocaleString("en-IN", {
+            month: "long",
+            year: "numeric"
+        });
+</script></body>
+</html>

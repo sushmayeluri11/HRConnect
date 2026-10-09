@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Review Requests</title><style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6fb;
+        color: #263248;
+    }
+
+    header {
+        background: #172554;
+        color: white;
+        padding: 22px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    header h2 {
+        font-size: 25px;
+    }
+
+    header a {
+        color: white;
+        text-decoration: none;
+        background: #334b83;
+        padding: 10px 16px;
+        border-radius: 7px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 35px auto;
+        padding: 0 20px;
+    }
+
+    .heading {
+        margin-bottom: 25px;
+    }
+
+    .heading h1 {
+        font-size: 29px;
+        margin-bottom: 8px;
+    }
+
+    .heading p {
+        color: #64748b;
+    }
+
+    .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .card, .panel {
+        background: white;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px #1725540d;
+        border: 1px solid #e5eaf3;
+    }
+
+    .card p {
+        color: #64748b;
+        margin-bottom: 12px;
+    }
+
+    .card h2 {
+        font-size: 27px;
+        color: #172554;
+    }
+
+    .panel h2 {
+        margin-bottom: 18px;
+        font-size: 21px;
+    }
+
+    .filters {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    input, select {
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        background: white;
+        font-size: 14px;
+    }
+
+    input {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        min-width: 750px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e8edf5;
+    }
+
+    th {
+        background: #f1f5fb;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .status {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .approved {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .rejected {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .btn {
+        padding: 8px 11px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        margin: 2px;
+        font-size: 12px;
+    }
+
+    .approve {
+        background: #15803d;
+    }
+
+    .reject {
+        background: #dc2626;
+    }
+
+    .note {
+        margin-top: 20px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 20px;
+        }
+
+        .container {
+            margin-top: 25px;
+        }
+
+        .panel {
+            padding: 15px;
+        }
+    }
+</style>
+
+</head><body><header>
+    <h2>HR Connect</h2>
+    <a href="hr-dashboard.html">← Back to Dashboard</a>
+</header><main class="container"><section class="heading">
+    <h1>Review Requests</h1>
+    <p>Review employee leave requests and update their demo status.</p>
+</section>
+
+<section class="summary">
+    <div class="card">
+        <p>Total Requests</p>
+        <h2 id="totalCount">3</h2>
+    </div>
+
+    <div class="card">
+        <p>Pending Requests</p>
+        <h2 id="pendingCount">2</h2>
+    </div>
+
+    <div class="card">
+        <p>Reviewed Requests</p>
+        <h2 id="reviewedCount">1</h2>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Employee Leave Requests</h2>
+
+    <div class="filters">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search employee name or ID..."
+            oninput="filterRequests()"
+        >
+
+        <select id="statusFilter" onchange="filterRequests()">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Employee</th>
+                    <th>Leave Type</th>
+                    <th>Dates</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="requestRows">
+                <tr data-status="pending">
+                    <td>LR001</td>
+                    <td>EMP001 - Ravi Kumar</td>
+                    <td>Sick Leave</td>
+                    <td>12–13 Oct 2026</td>
+                    <td class="status-cell">
+                        <span class="status pending">Pending</span>
+                    </td>
+                    <td>
+                        <button class="btn approve"
+                            onclick="updateStatus(this, 'approved')">
+                            Approve
+                        </button>
+                        <button class="btn reject"
+                            onclick="updateStatus(this, 'rejected')">
+                            Reject
+                        </button>
+                    </td>
+                </tr>
+
+                <tr data-status="pending">
+                    <td>LR002</td>
+                    <td>EMP002 - Priya Sharma</td>
+                    <td>Casual Leave</td>
+                    <td>15 Oct 2026</td>
+                    <td class="status-cell">
+                        <span class="status pending">Pending</span>
+                    </td>
+                    <td>
+                        <button class="btn approve"
+                            onclick="updateStatus(this, 'approved')">
+                            Approve
+                        </button>
+                        <button class="btn reject"
+                            onclick="updateStatus(this, 'rejected')">
+                            Reject
+                        </button>
+                    </td>
+                </tr>
+
+                <tr data-status="approved">
+                    <td>LR003</td>
+                    <td>EMP003 - Arjun Reddy</td>
+                    <td>Personal Leave</td>
+                    <td>20 Oct 2026</td>
+                    <td class="status-cell">
+                        <span class="status approved">Approved</span>
+                    </td>
+                    <td>Reviewed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p id="message" class="note" aria-live="polite"></p>
+
+    <p class="note">
+        Demo notice: Requests are sample records. Approve or Reject
+        updates the status on this page only; changes are not saved
+        to the database.
+    </p>
+</section>
+
+</main><footer>
+    © 2026 HR Connect | Human Resource Management System
+</footer><script>
+    function updateStatus(button, newStatus) {
+        const row = button.closest("tr");
+
+        row.dataset.status = newStatus;
+
+        const statusCell = row.querySelector(".status-cell");
+
+        statusCell.innerHTML =
+            '<span class="status ' + newStatus + '">' +
+            (newStatus === "approved" ? "Approved" : "Rejected") +
+            '</span>';
+
+        row.cells[5].textContent = "Reviewed";
+
+        document.getElementById("message").textContent =
+            "Request " + row.cells[0].textContent +
+            " marked as " + newStatus + " (demo only).";
+
+        updateCounts();
+        filterRequests();
+    }
+
+    function updateCounts() {
+        const rows = [...document.querySelectorAll("#requestRows tr")];
+
+        const pending = rows.filter(
+            row => row.dataset.status === "pending"
+        ).length;
+
+        document.getElementById("totalCount").textContent = rows.length;
+        document.getElementById("pendingCount").textContent = pending;
+        document.getElementById("reviewedCount").textContent =
+            rows.length - pending;
+    }
+
+    function filterRequests() {
+        const search = document.getElementById("search")
+            .value.toLowerCase();
+
+        const status = document.getElementById("statusFilter").value;
+
+        document.querySelectorAll("#requestRows tr").forEach(row => {
+            const matchesSearch = row.textContent.toLowerCase()
+                .includes(search);
+
+            const matchesStatus =
+                status === "all" || row.dataset.status === status;
+
+            row.style.display =
+                matchesSearch && matchesStatus ? "" : "none";
+        });
+    }
+
+    updateCounts();
+</script></body>
+</html>

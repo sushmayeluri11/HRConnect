@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | Performance Evaluation</title><style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6fb;
+        color: #263248;
+    }
+
+    header {
+        background: #172554;
+        color: white;
+        padding: 22px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    header h2 {
+        font-size: 25px;
+    }
+
+    header a {
+        color: white;
+        text-decoration: none;
+        background: #334b83;
+        padding: 10px 16px;
+        border-radius: 7px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 35px auto;
+        padding: 0 20px;
+    }
+
+    .heading {
+        margin-bottom: 25px;
+    }
+
+    .heading h1 {
+        font-size: 29px;
+        margin-bottom: 8px;
+    }
+
+    .heading p {
+        color: #64748b;
+    }
+
+    .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 18px;
+        margin-bottom: 25px;
+    }
+
+    .card, .panel {
+        background: white;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px #1725540d;
+        border: 1px solid #e5eaf3;
+    }
+
+    .card p {
+        color: #64748b;
+        margin-bottom: 12px;
+    }
+
+    .card h2 {
+        font-size: 27px;
+        color: #172554;
+    }
+
+    .panel h2 {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        min-width: 700px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px 12px;
+        text-align: left;
+        border-bottom: 1px solid #e8edf5;
+    }
+
+    th {
+        background: #f1f5fb;
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .rating {
+        font-weight: bold;
+        color: #1d4ed8;
+    }
+
+    .progress {
+        width: 110px;
+        height: 8px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress span {
+        display: block;
+        height: 100%;
+        background: #2563eb;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        font-size: 14px;
+        background: white;
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .btn {
+        border: none;
+        background: #2563eb;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .note {
+        margin-top: 18px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 20px;
+        }
+
+        .container {
+            margin-top: 25px;
+        }
+
+        .panel {
+            padding: 15px;
+        }
+    }
+</style>
+
+</head><body><header>
+    <h2>HR Connect</h2>
+    <a href="hr-dashboard.html">← Back to Dashboard</a>
+</header><main class="container"><section class="heading">
+    <h1>Performance Evaluation</h1>
+    <p>Review employee performance and record evaluation feedback.</p>
+</section>
+
+<section class="summary">
+    <div class="card">
+        <p>Employees Listed</p>
+        <h2>5</h2>
+    </div>
+
+    <div class="card">
+        <p>Evaluation Period</p>
+        <h2 style="font-size:21px;">Quarterly</h2>
+    </div>
+
+    <div class="card">
+        <p>Average Rating</p>
+        <h2>4.2 / 5</h2>
+    </div>
+</section>
+
+<section class="panel" style="margin-bottom:25px;">
+    <h2>Employee Performance Overview</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Rating</th>
+                    <th>Performance</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>EMP001</td>
+                    <td>Ravi Kumar</td>
+                    <td>IT</td>
+                    <td class="rating">4.5 / 5</td>
+                    <td><div class="progress"><span style="width:90%"></span></div></td>
+                </tr>
+
+                <tr>
+                    <td>EMP002</td>
+                    <td>Priya Sharma</td>
+                    <td>HR</td>
+                    <td class="rating">4.2 / 5</td>
+                    <td><div class="progress"><span style="width:84%"></span></div></td>
+                </tr>
+
+                <tr>
+                    <td>EMP003</td>
+                    <td>Arjun Reddy</td>
+                    <td>Finance</td>
+                    <td class="rating">4.0 / 5</td>
+                    <td><div class="progress"><span style="width:80%"></span></div></td>
+                </tr>
+
+                <tr>
+                    <td>EMP004</td>
+                    <td>Sneha Patel</td>
+                    <td>Marketing</td>
+                    <td class="rating">4.3 / 5</td>
+                    <td><div class="progress"><span style="width:86%"></span></div></td>
+                </tr>
+
+                <tr>
+                    <td>EMP005</td>
+                    <td>Kiran Kumar</td>
+                    <td>IT</td>
+                    <td class="rating">4.0 / 5</td>
+                    <td><div class="progress"><span style="width:80%"></span></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Add Performance Evaluation</h2>
+
+    <form id="evaluationForm">
+        <div class="form-grid">
+
+            <div>
+                <label for="employee">Employee</label>
+                <select id="employee" required>
+                    <option value="">Select employee</option>
+                    <option value="EMP001 - Ravi Kumar">EMP001 - Ravi Kumar</option>
+                    <option value="EMP002 - Priya Sharma">EMP002 - Priya Sharma</option>
+                    <option value="EMP003 - Arjun Reddy">EMP003 - Arjun Reddy</option>
+                    <option value="EMP004 - Sneha Patel">EMP004 - Sneha Patel</option>
+                    <option value="EMP005 - Kiran Kumar">EMP005 - Kiran Kumar</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="period">Evaluation Period</label>
+                <select id="period" required>
+                    <option value="">Select period</option>
+                    <option>Quarter 1</option>
+                    <option>Quarter 2</option>
+                    <option>Quarter 3</option>
+                    <option>Quarter 4</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="rating">Performance Rating</label>
+                <select id="rating" required>
+                    <option value="">Select rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Needs Improvement</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+
+            <div class="full-width">
+                <label for="feedback">Feedback</label>
+                <textarea id="feedback"
+                    placeholder="Enter performance feedback..."
+                    required></textarea>
+            </div>
+
+            <div class="full-width">
+                <button class="btn" type="submit">Submit Evaluation</button>
+            </div>
+
+        </div>
+    </form>
+
+    <p id="message" class="note" aria-live="polite"></p>
+
+    <p class="note">
+        Demo notice: Employee ratings shown above are sample data.
+        Submitted evaluations are displayed as a confirmation only;
+        they are not saved to the database.
+    </p>
+</section>
+
+</main><footer>
+    © 2026 HR Connect | Human Resource Management System
+</footer><script>
+    document.getElementById("evaluationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const employee = document.getElementById("employee").value;
+        const period = document.getElementById("period").value;
+        const rating = document.getElementById("rating").value;
+        const feedback = document.getElementById("feedback").value.trim();
+
+        if (!employee || !period || !rating || !feedback) {
+            document.getElementById("message").textContent =
+                "Please fill in all fields.";
+            return;
+        }
+
+        document.getElementById("message").textContent =
+            "Demo evaluation submitted for " + employee +
+            " | " + period + " | Rating: " + rating + "/5. " +
+            "This entry has not been saved to the database.";
+
+        this.reset();
+    });
+</script></body>
+</html>

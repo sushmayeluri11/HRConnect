@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HR Connect | Employee Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #082b59, #147fba);
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            padding: 38px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand {
+            text-align: center;
+            color: #1769d2;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .login-card h1 {
+            margin: 18px 0 8px;
+            font-size: 29px;
+            text-align: center;
+            color: #172b4d;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #263858;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d5deeb;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #1769d2;
+            box-shadow: 0 0 0 3px #1769d21a;
+        }
+
+        .login-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #1769d2;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-submit:hover {
+            background: #1054ac;
+        }
+
+        .login-submit:disabled {
+            background: #8aa9d6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .back-links {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-links a {
+            color: #1769d2;
+            text-decoration: none;
+        }
+
+        .back-links p {
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="brand">
+                HR Connect
+            </div>
+
+            <h1>Employee Login</h1>
+
+            <p class="subtitle">
+                Sign in to access your employee portal.
+            </p>
+
+            <form id="employeeLoginForm">
+
+                <div class="form-group">
+
+                    <label for="employeeId">
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employeeId"
+                        name="employeeId"
+                        placeholder="Enter your employee ID"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-submit"
+                    id="loginButton"
+                >
+                    Login
+                </button>
+
+
+                <p
+                    id="loginMessage"
+                    class="message"
+                    role="status"
+                ></p>
+
+            </form>
+
+
+            <div class="back-links">
+
+                <a href="login-choice.html">
+                    ← Back to Login Selection
+                </a>
+
+                <p>
+                    <a href="index.html">
+                        Back to Home
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const employeeLoginForm =
+            document.getElementById("employeeLoginForm");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+
+        employeeLoginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const employeeId =
+                    document.getElementById("employeeId")
+                    .value
+                    .trim();
+
+                const password =
+                    document.getElementById("password")
+                    .value
+                    .trim();
+
+
+                if (!employeeId || !password) {
+
+                    loginMessage.style.color = "#b42318";
+
+                    loginMessage.textContent =
+                        "Please enter Employee ID and password.";
+
+                    return;
+                }
+
+
+                loginMessage.style.color = "#1769d2";
+
+                loginMessage.textContent =
+                    "Logging in...";
+
+                loginButton.disabled = true;
+
+
+                try {
+
+                    const response = await fetch(
+                        "http://127.0.0.1:5000/api/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                role: "employee",
+
+                                employee_id:
+                                    employeeId,
+
+                                password:
+                                    password
+
+                            })
+                        }
+                    );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.success) {
+
+                        loginMessage.style.color =
+                            "#16803c";
+
+                        loginMessage.textContent =
+                            "Login successful!";
+
+
+                        localStorage.setItem(
+                            "employeeUser",
+                            JSON.stringify(data.user)
+                        );
+
+
+                        setTimeout(function() {
+
+                            window.location.href =
+                                "employee-dashboard.html";
+
+                        }, 500);
+
+
+                    } else {
+
+                        loginMessage.style.color =
+                            "#b42318";
+
+                        loginMessage.textContent =
+                            data.message ||
+                            "Invalid Employee ID or password.";
+
+                        loginButton.disabled = false;
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Employee login error:",
+                        error
+                    );
+
+
+                    loginMessage.style.color =
+                        "#b42318";
+
+                    loginMessage.textContent =
+                        "Python backend is not connected.";
+
+                    loginButton.disabled = false;
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

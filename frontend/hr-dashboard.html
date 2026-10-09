@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Connect | HR Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #f3f6fc;
+            color: #20304b;
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            background: #102f60;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar h2 { margin: 0; }
+
+        .topbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border: 1px solid #ffffff80;
+            border-radius: 7px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1300px;
+            margin: 30px auto;
+        }
+
+        .welcome-card {
+            padding: 28px;
+            border-radius: 14px;
+            color: white;
+            background: linear-gradient(120deg, #1769d2, #29a3d5);
+            margin-bottom: 28px;
+        }
+
+        .welcome-card h1 { margin-top: 0; }
+
+        .welcome-card p { margin-bottom: 0; }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card, .panel {
+            background: white;
+            padding: 23px;
+            border-radius: 12px;
+            border: 1px solid #e5eaf3;
+            box-shadow: 0 4px 18px #19375b08;
+        }
+
+        .stat-card p { color: #758198; }
+
+        .stat-card h2 {
+            font-size: 30px;
+            color: #1769d2;
+            margin: 8px 0;
+        }
+
+        .section-title { margin: 30px 0 18px; }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .panel h3 { margin-top: 0; }
+
+        .panel p {
+            color: #758198;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .panel a {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 14px;
+            border-radius: 7px;
+            background: #1769d2;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .notice {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff5d9;
+            border-radius: 8px;
+            color: #775600;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .management-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 550px) {
+            .stats, .management-grid { grid-template-columns: 1fr; }
+            .topbar { padding: 18px 4%; }
+            .container { width: 92%; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <h2>HR Connect | Admin</h2>
+        <a href="index.html">Logout</a>
+    </header>
+
+    <main class="container">
+        <section class="welcome-card">
+            <h1>HR Management Dashboard</h1>
+            <p>Manage your workforce and HR operations in one place.</p>
+        </section>
+
+        <h2 class="section-title">Workforce Overview</h2>
+
+        <section class="stats">
+            <article class="stat-card">
+                <p>Total Employees</p>
+                <h2>5</h2>
+                <p>Registered employees</p>
+            </article>
+
+            <article class="stat-card">
+                <p>Present Today</p>
+                <h2>4</h2>
+                <p>Attendance records</p>
+            </article>
+
+            <article class="stat-card">
+                <p>Pending Leaves</p>
+                <h2>--</h2>
+                <p>Awaiting approval</p>
+            </article>
+
+            <article class="stat-card">
+                <p>Performance Reviews</p>
+                <h2>3</h2>
+                <p>Evaluation records</p>
+            </article>
+        </section>
+
+        <h2 class="section-title">HR Operations</h2>
+
+        <section class="management-grid">
+            <article class="panel">
+                <h3>Employee Management</h3>
+                <p>Manage employee profiles, departments and job roles.</p>
+                <a href="manage-employees.html">Manage Employees</a>
+            </article>
+
+            <article class="panel">
+                <h3>Attendance & Payroll</h3>
+                <p>Review attendance and manage salary records.</p>
+                <a href="manage-payroll.html">Manage Payroll</a>
+            </article>
+
+            <article class="panel">
+                <h3>Leave Approvals</h3>
+                <p>Review employee leave applications and decisions.</p>
+                <a href="review-requests.html">Review Requests</a>
+            </article>
+
+            <article class="panel">
+                <h3>Performance Evaluation</h3>
+                <p>Record evaluations and review employee progress.</p>
+                <a href="view-evaluation.html">View Evaluations</a>
+            </article>
+
+            <article class="panel">
+                <h3>HR Documents</h3>
+                <p>Manage employee documents with controlled access.</p>
+                <a href="manage-documents.html">Manage Documents</a>
+            </article>
+
+            <article class="panel">
+                <h3>Reports & Analytics</h3>
+                <p>Review workforce metrics and HR reports.</p>
+                <a href="view-reports.html">View Reports</a>
+            </article>
+        </section>
+
+        <div class="notice">
+            <strong>Development status:</strong>
+            Dashboard design is ready. Live employee data,
+            permissions and management actions will be connected
+            through the Python backend and MySQL database.
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll(".future-link").forEach(function(link) {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                alert("This feature will be enabled after backend integration.");
+            });
+        });
+    </script>
+</body>
+</html>
